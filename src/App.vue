@@ -28,9 +28,6 @@ const store = new Vuex.Store({
   getters: {
     racks: state => {
       return state.racks;
-    },
-    rackImage: state => id => {
-      return require("@/assets/" + state.racks[id].imgUrl);
     }
   }
 });
@@ -41,7 +38,11 @@ store.commit("addRack", {
 });
 store.commit("addRack", {
   brand: "engl",
-  imgUrl: "racks/engle530.png"
+  imgUrl: "racks/engl-e530.png"
+});
+store.commit("addRack", {
+  brand: "rocktron",
+  imgUrl: "racks/rocktron-velocity.png"
 });
 
 export default {

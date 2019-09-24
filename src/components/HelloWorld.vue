@@ -26,8 +26,8 @@
       <v-toolbar-title>Application</v-toolbar-title>
     </v-app-bar>
 
-    <div class="rack-container">
-      <img :src="store.getters.rackImage(0)" />
+    <div v-for="rack of store.getters.racks" v-bind:key="rack" class="rack-container">
+      <img :src="rackImage(rack.imgUrl)" />
     </div>
 
     <v-footer app>
@@ -44,6 +44,11 @@ export default {
   }),
   created() {
     this.$vuetify.theme.dark = true;
+  },
+  methods: {
+    rackImage(imgUrl) {
+      return require("@/assets/" + imgUrl);
+    }
   }
 };
 </script>
