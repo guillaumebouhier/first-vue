@@ -1,36 +1,56 @@
 <template>
   <v-app>
-    <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        text
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-app-bar>
-
     <v-content>
-      <HelloWorld/>
+      <HelloWorld v-bind:store="store" />
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import HelloWorld from "./components/HelloWorld";
+import Vuex from "vuex";
+import Vue from "vue";
+Vue.use(Vuex);
+
+const store = new Vuex.Store({
+  state: {
+    count: 0,
+    racks: []
+  },
+  mutations: {
+    increment(state) {
+      state.count++;
+    },
+    addRack(state, rack) {
+      state.racks.push(rack);
+    }
+  },
+  getters: {
+    racks: state => {
+      return state.racks;
+    },
+    rackImage: state => id => {
+      return require("@/assets/" + state.racks[id].imgUrl);
+    }
+  }
+});
+
+store.commit("addRack", {
+  brand: "furman",
+  imgUrl: "racks/furman.png"
+});
+store.commit("addRack", {
+  brand: "engl",
+  imgUrl: "racks/engle530.png"
+});
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld,
+    HelloWorld
   },
   data: () => ({
-    //
-  }),
+    store: store
+  })
 };
 </script>
