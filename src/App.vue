@@ -8,6 +8,7 @@
 
 <script>
 import HelloWorld from "./components/HelloWorld";
+
 import Vuex from "vuex";
 import Vue from "vue";
 Vue.use(Vuex);

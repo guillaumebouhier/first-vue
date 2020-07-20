@@ -26,13 +26,7 @@
       <v-toolbar-title>Application</v-toolbar-title>
     </v-app-bar>
 
-    <div v-for="rack of store.getters.racks" v-bind:key="rack" class="rack-container">
-      <img
-        @click="store.commit('toggleRack', rack)"
-        :src="rackImage(rack.imgUrl)"
-        :class="{ disabled: !rack.activated }"
-      />
-    </div>
+    <RackDisplay :store="store"></RackDisplay>
 
     <v-footer app>
       <span>&copy; 2020</span>
@@ -41,8 +35,13 @@
 </template>
 
 <script>
+import RackDisplay from "./RackDisplay";
 export default {
+  components: {
+    RackDisplay
+  },
   props: { store: Object },
+
   data: () => ({
     drawer: null
   }),
