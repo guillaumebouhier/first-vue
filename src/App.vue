@@ -12,7 +12,7 @@ import Vuex from "vuex";
 import Vue from "vue";
 Vue.use(Vuex);
 
-const store = new Vuex.Store({
+const Store = new Vuex.Store({
   state: {
     count: 0,
     racks: []
@@ -23,6 +23,9 @@ const store = new Vuex.Store({
     },
     addRack(state, rack) {
       state.racks.push(rack);
+    },
+    toggleRack(state, rack) {
+      rack.activated = !rack.activated;
     }
   },
   getters: {
@@ -32,17 +35,25 @@ const store = new Vuex.Store({
   }
 });
 
-store.commit("addRack", {
+Store.commit("addRack", {
   brand: "furman",
-  imgUrl: "racks/furman.png"
+  imgUrl: "racks/furman.png",
+  activated: true
 });
-store.commit("addRack", {
+Store.commit("addRack", {
   brand: "engl",
-  imgUrl: "racks/engl-e530.png"
+  imgUrl: "racks/engl-e530.png",
+  activated: true
 });
-store.commit("addRack", {
+Store.commit("addRack", {
+  brand: "fractal",
+  imgUrl: "racks/axefx2.png",
+  activated: false
+});
+Store.commit("addRack", {
   brand: "rocktron",
-  imgUrl: "racks/rocktron-velocity.png"
+  imgUrl: "racks/rocktron-velocity.png",
+  activated: true
 });
 
 export default {
@@ -51,7 +62,7 @@ export default {
     HelloWorld
   },
   data: () => ({
-    store: store
+    store: Store
   })
 };
 </script>

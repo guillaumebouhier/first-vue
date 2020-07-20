@@ -27,11 +27,15 @@
     </v-app-bar>
 
     <div v-for="rack of store.getters.racks" v-bind:key="rack" class="rack-container">
-      <img :src="rackImage(rack.imgUrl)" />
+      <img
+        @click="store.commit('toggleRack', rack)"
+        :src="rackImage(rack.imgUrl)"
+        :class="{ disabled: !rack.activated }"
+      />
     </div>
 
     <v-footer app>
-      <span>&copy; 2019</span>
+      <span>&copy; 2020</span>
     </v-footer>
   </v-app>
 </template>
@@ -58,5 +62,9 @@ export default {
   display: flex;
   justify-content: center;
   padding: 10px;
+  opacity: 1;
+}
+.disabled {
+  opacity: 0.2;
 }
 </style>
