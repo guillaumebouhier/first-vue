@@ -1,44 +1,32 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" app clipped>
-      <v-list dense>
-        <v-list-item>
-          <v-list-item-action>
-            <v-icon>mdi-view-dashboard</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Dashboard</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item>
-          <v-list-item-action>
-            <v-icon>mdi-settings</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Settings</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+      <RackLibrary :library="library" :store="store"></RackLibrary>
     </v-navigation-drawer>
 
     <v-app-bar app clipped-left>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>Virtual Guitar Rack</v-toolbar-title>
     </v-app-bar>
 
-    <div v-for="rack of store.getters.racks" v-bind:key="rack" class="rack-container">
-      <img :src="rackImage(rack.imgUrl)" />
-    </div>
+    <RackDisplay :store="store"></RackDisplay>
 
     <v-footer app>
-      <span>&copy; 2019</span>
+      <span>&copy; 2020</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
+import RackDisplay from "./RackDisplay";
+import RackLibrary from "./RackLibrary";
 export default {
-  props: { store: Object },
+  components: {
+    RackDisplay,
+    RackLibrary
+  },
+  props: { store: Object, library: Object },
+
   data: () => ({
     drawer: null
   }),
@@ -58,5 +46,9 @@ export default {
   display: flex;
   justify-content: center;
   padding: 10px;
+  opacity: 1;
+}
+.disabled {
+  opacity: 0.2;
 }
 </style>
