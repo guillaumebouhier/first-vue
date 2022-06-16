@@ -12,32 +12,32 @@
     <RackDisplay :store="store"></RackDisplay>
 
     <v-footer app>
-      <span>&copy; 2020</span>
+      <span>&copy; 2021</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
-import RackDisplay from "./RackDisplay";
-import RackLibrary from "./RackLibrary";
+import RackDisplay from './RackDisplay';
+import RackLibrary from './RackLibrary';
 export default {
   components: {
     RackDisplay,
-    RackLibrary
+    RackLibrary,
   },
   props: { store: Object, library: Object },
 
   data: () => ({
-    drawer: null
+    drawer: null,
   }),
   created() {
     this.$vuetify.theme.dark = true;
   },
   methods: {
     rackImage(imgUrl) {
-      return require("@/assets/" + imgUrl);
-    }
-  }
+      return require('@/assets/' + imgUrl);
+    },
+  },
 };
 </script>
 
